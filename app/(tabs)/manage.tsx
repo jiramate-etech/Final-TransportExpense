@@ -19,8 +19,10 @@ export default function ManageScreen() {
     const loadData = async () => {
         const jsonValue = await AsyncStorage.getItem('travel_data');
         const data = jsonValue != null ? JSON.parse(jsonValue) : [];
+        
+        data.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
         setItems(data);
-    };
+};
 
     const confirmDelete = (id: string) => {
         Alert.alert('ยืนยันลบรายการ', 'ข้อมูลจะหายไปถาวรเลยนะ?', [
